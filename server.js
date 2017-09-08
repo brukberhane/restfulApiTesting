@@ -97,6 +97,25 @@ server.route({
 // ############ THIS CODE IS NOT PART OF THE RESTFUL API BUT FOR THE TESTING OF IT ############
 
 server.route({
+    method: 'DELETE',
+    path: '/message/{uid}/{mid}',
+    handler: function (request, reply){
+        const uid = request.params.uid;
+        const mid = request.params.mid;
+
+        connection.query('DELETE FROM messages WHERE uid_fk = "'+uid+'" AND mid = "'+mid+'"', function (error, result, fields){
+            if (error) throw error;
+            
+            if (result.affectedRows){
+                reply (true);
+            } else {
+                reply(false);
+            }
+        });
+    }
+})
+
+server.route({
     method: 'POST',
     path: "/signup",
     handler: function (request, reply){
