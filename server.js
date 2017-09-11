@@ -17,7 +17,7 @@ const connection = MySQL.createConnection({
 
 server.connection({
     host: 'localhost',
-    port: '6969'
+    port: '8000'
 });
 
 connection.connect(function(req,rep){
@@ -61,7 +61,7 @@ server.route({
     handler: function (request, reply){
         connection.query("SELECT uid, username, email FROM users", function(error, results, fields){
             if (error) throw error;
-
+            
             reply(results);
         });
     }
@@ -69,7 +69,7 @@ server.route({
 
 server.route({
     method: 'POST',
-    path: '/messages',
+    path: '/messags',
     handler: function (request, reply) {
     
         const uid = request.payload.uid;
@@ -83,6 +83,23 @@ server.route({
             payload: {
                 uid: Joi.number().integer()
             }
+        }
+    }
+});
+
+server.route({
+    method: 'GET',
+    path: '/messages',
+    handler: function (request, reply){
+
+        connection.query("SELECT * FROM messages", function (err, res){
+            reply(res);
+        });
+    },
+    config: {
+        cors: {
+            origin: ['*'],
+            additionalHeaders: ['cache-control', 'x-requested-with']
         }
     }
 });
