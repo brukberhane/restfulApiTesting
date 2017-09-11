@@ -34,8 +34,8 @@ app.get('/', function (req, res){
 });
 
 app.post('/sendmsg', function (req, res){
-	const uid = req.payload.uid;
-	const message = req.payload.message;
+	const uid = req.body.uid;
+	const message = req.body.message;
 
 	connection.query("INSERT INTO messages (message, uid_fk) VALUES ('"+message+"', "+uid+")", function (error, results, fields){
 		if (error) throw error;
