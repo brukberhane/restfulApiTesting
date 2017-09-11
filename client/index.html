@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <title>
+            LAText!
+        </title>
+        <script src="/jquery" type="text/javascript"></script>
+    </head>
+    <body bgcolor='gray'>
+        
+        <h1 align='center'> Messages: </h1>
+
+        <script>
+        
+        $(document).ready(function () {
+            $('h1').slideUp(1000).fadeIn();
+            $.get('http://localhost:8000/messages', {}, function(data){
+                console.log(data)
+           });
+        });
+
+        $(document.body).append("Hello");
+
+        </script>
+
+    </body>
+</html>

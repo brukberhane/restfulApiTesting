@@ -2,6 +2,8 @@
 const Hapi = require('hapi');
 const MySQL = require('mysql');
 const Joi = require('joi');
+const express = require('express');
+const app = express();
 
 //Create a server with a host and port
 const server = new Hapi.Server();
@@ -15,7 +17,7 @@ const connection = MySQL.createConnection({
 
 server.connection({
     host: 'localhost',
-    port: '6969'
+    port: '8000'
 });
 
 connection.connect(function(req,rep){
@@ -35,7 +37,7 @@ server.route({
     method: 'GET',
     path: '/user/{uid}',
     handler: function (request, reply) {
-        const uid = request.params.uid;
+        const uid = request.params.uid;
 
         connection.query('SELECT uid, username, email FROM users WHERE uid = "' + uid + '"',function (error, results, fields) {
             if (error) throw error;
@@ -59,7 +61,7 @@ server.route({
     handler: function (request, reply){
         connection.query("SELECT uid, username, email FROM users", function(error, results, fields){
             if (error) throw error;
-
+            
             reply(results);
         });
     }
@@ -67,7 +69,7 @@ server.route({
 
 server.route({
     method: 'POST',
-    path: '/messages',
+    path: '/messags',
     handler: function (request, reply) {
     
         const uid = request.payload.uid;
@@ -81,6 +83,23 @@ server.route({
             payload: {
                 uid: Joi.number().integer()
             }
+        }
+    }
+});
+
+server.route({
+    method: 'GET',
+    path: '/messages',
+    handler: function (request, reply){
+
+        connection.query("SELECT * FROM messages", function (err, res){
+            reply(res);
+        });
+    },
+    config: {
+        cors: {
+            origin: ['*'],
+            additionalHeaders: ['cache-control', 'x-requested-with']
         }
     }
 });
@@ -148,3 +167,4 @@ server.start((err) => {
     var chunk = {id:12, data:'mlemlem', stuff:'dis is de staffs'};
     console.log(chunk.id);
 });
+
