@@ -16,9 +16,30 @@ app.get('/', function (req, res){
 	connection.query('SELECT * FROM messages', function (err, results, fields){
 		if (err) throw err;
 		for (var i=0; i < results.length; i++){
-			res.write("<h3>"+results[i].message+"</h1><br>");
+			if (results[i].uid_fk == 1){
+				res.write("<h3 align='left'>"+results[i].message+"</h3>");
+			} else if (results[i].uid_fk == 2) {
+				res.write("<h3 align='right'> "+results[i].message+"</h3>");
+			}
 		}
+
+		res.write("<form action='/sendmsg' method='POST'> "+
+				"<input type='text' name='uid'><br> "+
+ 			 	"<input type='text' name='message' width='100px'> "+ 
+				"<input type='submit' value='GO'> "+
+				 "</form>");
+
 		res.end("End Messagess.");
+	});
+});
+
+app.post('/sendmsg', function (req, res){
+	const uid = req.payload.uid;
+	const message = req.payload.message;
+
+	connection.query("INSERT INTO messages (message, uid_fk) VALUES ('"+message+"', "+uid+")", function (error, results, fields){
+		if (error) throw error;
+		res.redirect('/');
 	});
 });
 
