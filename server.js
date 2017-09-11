@@ -2,6 +2,8 @@
 const Hapi = require('hapi');
 const MySQL = require('mysql');
 const Joi = require('joi');
+const express = require('express');
+const app = express();
 
 //Create a server with a host and port
 const server = new Hapi.Server();
@@ -35,7 +37,7 @@ server.route({
     method: 'GET',
     path: '/user/{uid}',
     handler: function (request, reply) {
-        const uid = request.params.uid;
+        const uid = request.params.uid;
 
         connection.query('SELECT uid, username, email FROM users WHERE uid = "' + uid + '"',function (error, results, fields) {
             if (error) throw error;
@@ -148,3 +150,4 @@ server.start((err) => {
     var chunk = {id:12, data:'mlemlem', stuff:'dis is de staffs'};
     console.log(chunk.id);
 });
+
