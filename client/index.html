@@ -9,6 +9,23 @@
         
         <h1 align='center'> Messages: </h1>
 
+        <div class="menu wrap">
+            <aside class="left-off-canvas-menu"></aside>
+        </div>
+<!-- css file
+
+.menu wrap{
+    height: 100%;
+    overflow-y: scroll; 
+}
+
+html, body {
+    height: 100%;
+}
+
+-->
+
+
         <script>
         
         $(document).ready(function () {
@@ -19,6 +36,12 @@
         });
 
         $(document.body).append("Hello");
+
+        $('#fullpage').fullpage({
+            loopHorizontal: false,
+            scrollBar: true,
+            normalScrollElements: '.menuWrap'
+        });
 
         </script>
 
