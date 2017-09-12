@@ -5,18 +5,20 @@
             LAText!
         </title>
         <script src="/jquery" type="text/javascript"></script>
-        <script> var d; </script>
     </head>
     <body bgcolor='gray'>
         
         <h1 align='center' id="msgtitle"> Messages: </h1>
 
-        <div style='background-color:blue' </div>
+        <div style='background-color:blue'>Hello? </div>
 
         <script>
-        var d = [];
+        var gvarData;
         $(function () {
-            $('#msgtitle').slideUp(1000).fadeIn();
+            $('#msgtitle').hide().slideDown('slow');
+
+            var d = [];
+            var tempvar = false;
             
             $.get('http://localhost:8000/messages', {}, function(data){
                 console.log(data)
@@ -27,16 +29,31 @@
                         $(document.body).append("<div align='right' style='background-color: yellow'><h5>"+data[i].message+"</h5></div>");
                     }
                 }
-                return d = data;
+                //return data;
+                gvarData = data;
+                tempvar = true;
+                console.log(gvarData);
            });
-           for (var i=0; i < d.length; i++){
+           /*for (var i=0; i < d.length; i++){
                $(document.body).append(d[i].message);
-           }
-        });
+           }*/
 
-        $(document.body).append("Hello");
+           $('#msgtitle').click(function(){
+               console.log(gvarData);
+           });
+
+           $(document.body).append("Hello!!!");
+            //$(document.body).append(window.d[0].message);
+            
+           setInterval(function(){
+               //console.log(gvarData);
+           }, 300);
+
+           console.log(gvarData);
+
+        });
 
         </script>
 
     </body>
-</htmls>
+</html>

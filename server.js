@@ -9,7 +9,7 @@ const app = express();
 const server = new Hapi.Server();
 
 const connection = MySQL.createConnection({
-    host: 'localhost',
+    host: '192.168.137.1',
     user: 'bruk',
     password: 'pass12',
     database: 'test'
