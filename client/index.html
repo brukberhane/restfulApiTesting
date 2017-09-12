@@ -1,21 +1,37 @@
+<!DOCTYPE html>
 <html>
     <head>
         <title>
             LAText!
         </title>
         <script src="/jquery" type="text/javascript"></script>
+        <script> var d; </script>
     </head>
     <body bgcolor='gray'>
         
-        <h1 align='center'> Messages: </h1>
+        <h1 align='center' id="msgtitle"> Messages: </h1>
+
+        <div style='background-color:blue' </div>
 
         <script>
-        
-        $(document).ready(function () {
-            $('h1').slideUp(1000).fadeIn();
+        var d = [];
+        $(function () {
+            $('#msgtitle').slideUp(1000).fadeIn();
+            
             $.get('http://localhost:8000/messages', {}, function(data){
                 console.log(data)
+                for (var i=0; i < data.length; i++){
+                    if (data[i].uid_fk == 1){
+                    $(document.body).append("<div align='left' style='background-color: blue'><h5>"+ data[i].message+"</h5><br>");
+                    } else{
+                        $(document.body).append("<div align='right' style='background-color: yellow'><h5>"+data[i].message+"</h5></div>");
+                    }
+                }
+                return d = data;
            });
+           for (var i=0; i < d.length; i++){
+               $(document.body).append(d[i].message);
+           }
         });
 
         $(document.body).append("Hello");
@@ -23,4 +39,4 @@
         </script>
 
     </body>
-</html>
+</htmls>

@@ -1,0 +1,17 @@
+{
+  "name": "testservers",
+  "version": "1.0.0",
+  "description": "Just some random bullshittery",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo mlem"
+  },
+  "keywords": [
+    "node.js"
+  ],
+  "author": "Bruk Berhane",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.15.4"
+  }
+}
