@@ -93,7 +93,7 @@
 
         <div class="content-wrapper" id="wrap"></div>
         <script>
-        var d = [];
+        var gvarData;
         $(function () {
             $('#msgtitle').hide().slideDown('slow');
             
@@ -111,14 +111,26 @@
                 var wrapper = $('#wrap');
                 wrapper.scrollTop = wrapper.scrollHeight; 
            });
-           for (var i=0; i < d.length; i++){
+           /*for (var i=0; i < d.length; i++){
                $(document.body).append(d[i].message);
-           }
-        });
+           }*/
 
-        $(document.body).append("Hello");
+           $('#msgtitle').click(function(){
+               console.log(gvarData);
+           });
+
+           $(document.body).append("Hello!!!");
+            //$(document.body).append(window.d[0].message);
+            
+           setInterval(function(){
+               //console.log(gvarData);
+           }, 300);
+
+           console.log(gvarData);
+
+        });
 
         </script>
 
     </body>
-</htmls>
+</html>

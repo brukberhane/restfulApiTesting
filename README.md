@@ -1,6 +1,6 @@
 # restfulApiTesting
 
 # Recent changes:
-- Added the /messages/uid/mid route to the main server..
-
-This is where I copy the restful api from a tutorial site and make altercations for it to fit my needs
+- Added Message bubbles to the client.js file.
+- Better looking scrollbar also in client.js.
+- Adopted jQuery into the project.
