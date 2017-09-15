@@ -6,28 +6,110 @@
         </title>
         <script src="/jquery" type="text/javascript"></script>
         <script> var d; </script>
+        <style>
+        .triangle-obtuse {
+            position: relative;
+            padding:15px;
+            width:fit-content;
+            margin:1em auto 3em;
+            color:#fff;
+            background:#c81e2b;
+            /* css3 */
+            background:-webkit-gradient(linear, 0 0, 0 100%, from(#f04349), to(#c81e2b));
+            background:-moz-linear-gradient(#f04349, #c81e2b);
+            background:-o-linear-gradient(#f04349, #c81e2b);
+            background:linear-gradient(#f04349, #c81e2b);
+            -webkit-border-radius:10px;
+            -moz-border-radius:10px;
+            border-radius:10px;
+          }
+          
+          /* Variant : for top positioned triangle
+          ------------------------------------------ */
+          
+          .triangle-obtuse.top {
+            background:-webkit-gradient(linear, 0 0, 0 50%, from(#c81e2b), to(#f04349));
+            background:-moz-linear-gradient(#c81e2b, #f04349);
+            background:-o-linear-gradient(#c81e2b, #f04349);
+            background:linear-gradient(#c81e2b, #f04349);
+          }
+          
+          /* Variant : for left positioned triangle
+          ------------------------------------------ */
+          
+          .triangle-obtuse.left {
+            width: fit-content;
+            height: auto;
+            text-align: left;
+            color: yellow;
+            background: black;
+            margin-left:5px;
+            
+            
+          }
+          
+          /* Variant : for right positioned triangle
+          ------------------------------------------ */
+          
+          .triangle-obtuse.right {
+            margin-right:5px;
+            text-align: left;
+            /*background:#c81e2b;*/
+            background: yellow;
+            color: black
+          }
+
+          .content-wrapper{
+              overflow-y: auto;
+              height: 80%;
+          }
+
+          /* Scrollbar Styling */
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+ 
+            ::-webkit-scrollbar-track {
+                background-color: #ebebeb;
+                -webkit-border-radius: 10px;
+                border-radius: 10px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                -webkit-border-radius: 10px;
+                border-radius: 10px;
+                background: #6d6d6d; 
+            }
+
+        </style>
+
     </head>
     <body bgcolor='gray'>
         
         <h1 align='center' id="msgtitle"> Messages: </h1>
 
-        <div style='background-color:blue' </div>
+        <div style='background-color:blue'> </div>
 
+
+        <div class="content-wrapper" id="wrap"></div>
         <script>
         var d = [];
         $(function () {
-            $('#msgtitle').slideUp(1000).fadeIn();
+            $('#msgtitle').hide().slideDown('slow');
             
             $.get('http://localhost:8000/messages', {}, function(data){
                 console.log(data)
                 for (var i=0; i < data.length; i++){
                     if (data[i].uid_fk == 1){
-                    $(document.body).append("<div align='left' style='background-color: blue'><h5>"+ data[i].message+"</h5><br>");
+                        $('#wrap').append("<p class='triangle-obtuse left'>"+ data[i].message+"</p>");
                     } else{
-                        $(document.body).append("<div align='right' style='background-color: yellow'><h5>"+data[i].message+"</h5></div>");
+                        $(document.body).append("<p class='triangle-obtuse right' >"+data[i].message+"</p>");
                     }
                 }
                 return d = data;
+                alert("data has been gotten!");
+                var wrapper = $('#wrap');
+                wrapper.scrollTop = wrapper.scrollHeight; 
            });
            for (var i=0; i < d.length; i++){
                $(document.body).append(d[i].message);
