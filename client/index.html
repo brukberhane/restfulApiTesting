@@ -7,21 +7,25 @@
         <script src="/jquery" type="text/javascript"></script>
         <script> var d; </script>
         <style>
+
+            body{
+                overflow-y:visible;
+            }
         .triangle-obtuse {
             position: relative;
-            padding:15px;
+            padding:10px;
             width:fit-content;
-            margin:1em auto 3em;
+            margin:1em auto 1em;
             color:#fff;
-            background:#c81e2b;
-            /* css3 */
+            /*background:#c81e2b;*/
+            /* css3 
             background:-webkit-gradient(linear, 0 0, 0 100%, from(#f04349), to(#c81e2b));
             background:-moz-linear-gradient(#f04349, #c81e2b);
             background:-o-linear-gradient(#f04349, #c81e2b);
-            background:linear-gradient(#f04349, #c81e2b);
+            background:linear-gradient(#f04349, #c81e2b);*/
             -webkit-border-radius:10px;
             -moz-border-radius:10px;
-            border-radius:10px;
+            border-radius:2em;
           }
           
           /* Variant : for top positioned triangle
@@ -70,7 +74,7 @@
             }
  
             ::-webkit-scrollbar-track {
-                background-color: #ebebeb;
+                background-color: yellow;
                 -webkit-border-radius: 10px;
                 border-radius: 10px;
             }
@@ -78,9 +82,40 @@
             ::-webkit-scrollbar-thumb {
                 -webkit-border-radius: 10px;
                 border-radius: 10px;
-                background: #6d6d6d; 
+                background: black; 
             }
 
+            .textstuffs{
+                background: #1A1A1A;
+                border-radius: 2em;
+                border: none;
+                margin: 1em;
+                padding: 0.8em;
+    
+                color: #A2A2A2;
+                font-size: 1.1em;
+                padding-left: 1.5em;
+                outline: none;
+
+                /*Defining the width of the display*/
+                width:80%;
+
+                /*This is for bottom alignment*/
+                position: fixed;left:0;
+                bottom:0;
+                
+            }
+
+            .bottomstuff{
+                position: fixed;
+                bottom: 0;
+            }
+            .sendButton{
+                right:0;
+                margin: 1em;
+                font-size: 1.1em;
+                border-radius: 2em;
+            }
         </style>
 
     </head>
@@ -92,6 +127,14 @@
 
 
         <div class="content-wrapper" id="wrap"></div>
+        
+            <input type="text" class="textstuffs" autofocus placeholder="Say something..." autocomplete="on">
+            <button class="sendButton bottomstuff">+</button>
+        
+            <!--<textarea id="textarea" class="textstuffs" rows="1" autocomplete="on" autofocus="true" 
+        placeholder="Say something..." aria-label="Text entry field for Allo on web with Loving Birther."></textarea>-->
+        
+        
         <script>
         var gvarData;
         $(function () {
@@ -103,11 +146,15 @@
                     if (data[i].uid_fk == 1){
                         $('#wrap').append("<p class='triangle-obtuse left'>"+ data[i].message+"</p>");
                     } else{
-                        $(document.body).append("<p class='triangle-obtuse right' >"+data[i].message+"</p>");
+                        $('#wrap').append("<p class='triangle-obtuse right' >"+data[i].message+"</p>");
+                    }
+                    if (i == data.length-1){
+                        gvarData = data;
+                        console.log(gvarData);
                     }
                 }
-                return d = data;
-                alert("data has been gotten!");
+                gvarData = data;
+                //alert("data has been gotten!");
                 var wrapper = $('#wrap');
                 wrapper.scrollTop = wrapper.scrollHeight; 
            });
@@ -119,7 +166,7 @@
                console.log(gvarData);
            });
 
-           $(document.body).append("Hello!!!");
+           //$(document.body).append("Hello!!!");
             //$(document.body).append(window.d[0].message);
             
            setInterval(function(){
