@@ -69,6 +69,14 @@ server.route({
 
 server.route({
     method: 'POST',
+    path: '/append',
+    handler: function(request, reply){
+        
+    }
+})
+
+server.route({
+    method: 'POST',
     path: '/messags',
     handler: function (request, reply) {
     
