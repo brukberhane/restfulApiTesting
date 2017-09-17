@@ -1,154 +1,178 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            LAText!
-        </title>
-        <script src="/jquery" type="text/javascript"></script>
-        <script> var d; </script>
-        <style>
 
-            body{
-                overflow-y:visible;
-            }
+<head>
+    <title>
+        LAText!
+    </title>
+    <script src="/jquery" type="text/javascript"></script>
+    <script>
+        var d;
+    </script>
+    <style>
+        body {
+            overflow-y: visible;;
+        }
+
         .triangle-obtuse {
             position: relative;
-            padding:10px;
-            width:fit-content;
-            margin:1em auto 1em;
-            color:#fff;
+            padding: 10px;
+            width: fit-content;
+            margin: 1em auto 1em;
+            color: #fff;
             /*background:#c81e2b;*/
             /* css3 
             background:-webkit-gradient(linear, 0 0, 0 100%, from(#f04349), to(#c81e2b));
             background:-moz-linear-gradient(#f04349, #c81e2b);
             background:-o-linear-gradient(#f04349, #c81e2b);
             background:linear-gradient(#f04349, #c81e2b);*/
-            -webkit-border-radius:10px;
-            -moz-border-radius:10px;
-            border-radius:2em;
-          }
-          
-          /* Variant : for top positioned triangle
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 2em;
+        }
+        /* Variant : for top positioned triangle
           ------------------------------------------ */
-          
-          .triangle-obtuse.top {
-            background:-webkit-gradient(linear, 0 0, 0 50%, from(#c81e2b), to(#f04349));
-            background:-moz-linear-gradient(#c81e2b, #f04349);
-            background:-o-linear-gradient(#c81e2b, #f04349);
-            background:linear-gradient(#c81e2b, #f04349);
-          }
-          
-          /* Variant : for left positioned triangle
+
+        .triangle-obtuse.top {
+            background: -webkit-gradient(linear, 0 0, 0 50%, from(#c81e2b), to(#f04349));
+            background: -moz-linear-gradient(#c81e2b, #f04349);
+            background: -o-linear-gradient(#c81e2b, #f04349);
+            background: linear-gradient(#c81e2b, #f04349);
+        }
+        /* Variant : for left positioned triangle
           ------------------------------------------ */
-          
-          .triangle-obtuse.left {
+
+        .triangle-obtuse.left {
             width: fit-content;
             height: auto;
             text-align: left;
             color: yellow;
             background: black;
-            margin-left:5px;
-            
-            
-          }
-          
-          /* Variant : for right positioned triangle
+            margin-left: 5px;
+        }
+        /* Variant : for right positioned triangle
           ------------------------------------------ */
-          
-          .triangle-obtuse.right {
-            margin-right:5px;
+
+        .triangle-obtuse.right {
+            margin-right: 5px;
             text-align: left;
             /*background:#c81e2b;*/
             background: yellow;
             color: black
-          }
+        }
 
-          .content-wrapper{
-              overflow-y: auto;
-              height: 80%;
-          }
+        .content-wrapper {
+            overflow-y: auto;
+            height: 80%;
+        }
+        /* Scrollbar Styling */
 
-          /* Scrollbar Styling */
-            ::-webkit-scrollbar {
-                width: 10px;
-            }
- 
-            ::-webkit-scrollbar-track {
-                background-color: yellow;
-                -webkit-border-radius: 10px;
-                border-radius: 10px;
-            }
+         ::-webkit-scrollbar {
+            width: 10px;
+        }
 
-            ::-webkit-scrollbar-thumb {
-                -webkit-border-radius: 10px;
-                border-radius: 10px;
-                background: black; 
-            }
+         ::-webkit-scrollbar-track {
+            background-color: yellow;
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+        }
 
-            .textstuffs{
-                background: #1A1A1A;
-                border-radius: 2em;
-                border: none;
-                margin: 1em;
-                padding: 0.8em;
-    
-                color: #A2A2A2;
-                font-size: 1.1em;
-                padding-left: 1.5em;
-                outline: none;
+         ::-webkit-scrollbar-thumb {
+            -webkit-border-radius: 10px;
+            border-radius: 10px;
+            background: black;
+        }
 
-                /*Defining the width of the display*/
-                width:80%;
+        .textstuffs {
+            background: #1A1A1A;
+            border-radius: 2em;
+            border: none;
+            margin: 1.5em;
+            padding: 0.8em;
 
-                /*This is for bottom alignment*/
-                position: fixed;left:0;
-                bottom:0;
-                
-            }
+            color: #A2A2A2;
+            font-size: 1.1em;
+            padding-left: 1.5em;
+            outline: none;
 
-            .bottomstuff{
-                position: fixed;
-                bottom: 0;
-            }
-            .sendButton{
-                right:0;
-                margin: 1em;
-                font-size: 1.1em;
-                border-radius: 2em;
-            }
-        </style>
+            white-space:pre-wrap;
 
-    </head>
-    <body bgcolor='gray'>
-        
-        <h1 align='center' id="msgtitle"> Messages: </h1>
+            /*Defining the width of the display*/
+            width:85%;
+            /*This is for bottom alignment*/
+        }
 
-        <div style='background-color:blue'> </div>
+        .bottomstuff {
+            position: fixed;
+            bottom: 0;
+            width:100%;
+            overflow-x:visible;
+            display:inline-flex;
+        }
+
+        .sendButton {
+            width: 67px;
+            height: 67px;
+            margin: 0.6em;
+            font-size: 1.1em;
+            border-radius: 1em;
+            border: transparent;
+            background: transparent;
+            vertical-align: bottom;
+        }
+
+        .sendico {
+            color: yellow;
+        }
+    </style>
+
+</head>
+
+<body bgcolor='gray'>
+
+    <h1 align='center' id="msgtitle"> Messages: </h1>
+
+    <div style='background-color:blue'> </div>
 
 
-        <div class="content-wrapper" id="wrap"></div>
-        
-            <input type="text" class="textstuffs" autofocus placeholder="Say something..." autocomplete="on">
-            <button class="sendButton bottomstuff">+</button>
-        
-            <!--<textarea id="textarea" class="textstuffs" rows="1" autocomplete="on" autofocus="true" 
+    <div class="content-wrapper" id="wrap"></div>
+    <!-- class="textstuffs" class="sendButton bottomstuff"-->
+    <p class='bottomstuff' >
+        <textarea id="txt1" class="textstuffs" 
+        placeholder="Say something..." rows="1"></textarea>
+        <button class='sendButton'>
+                <svg viewBox='0 0 36 36' class='sendico' preserveAspectRatio="xMidYMid meet"style="pointer-events: none; display: block; width: 100%; height: 100%;background-color:transparent">
+                        <rect  x="1" y="1" width="34" height="34" rx="17" ry="17" fill="yellow"></rect>
+                    <g mirror-in-rtl="" viewBox='0 0 36 36'>
+                            <path  fill-rule="evenodd" d="M0,18a18,18 0 1,0 36,0a18,18 0 1,0 -36,0M9.01 27L30 18 9.01 9 9 16l15 2-15 2z" class="style-scope iron-icon"></path>
+                    </g>
+                </svg>
+            </button>
+    </p>
+    <p id="arsh"></p>
+    <!--<textarea id="textarea" class="textstuffs" rows="1" autocomplete="on" autofocus="true" 
         placeholder="Say something..." aria-label="Text entry field for Allo on web with Loving Birther."></textarea>-->
-        
-        
-        <script>
+
+
+
+    <script>
         var gvarData;
         $(function () {
             $('#msgtitle').hide().slideDown('slow');
-            
-            $.get('http://localhost:8000/messages', {}, function(data){
+            $('.textstuffs').hide().slideDown('slow');
+            $('.bottomstuff').hide().slideDown('slow');
+
+            $('#txt1').append('herro');
+
+            $.get('http://localhost:8000/messages', {}, function (data) {
                 console.log(data)
-                for (var i=0; i < data.length; i++){
-                    if (data[i].uid_fk == 1){
-                        $('#wrap').append("<p class='triangle-obtuse left'>"+ data[i].message+"</p>");
-                    } else{
-                        $('#wrap').append("<p class='triangle-obtuse right' >"+data[i].message+"</p>");
+                for (var i = 0; i < data.length; i++) {
+                    if (data[i].uid_fk == 1) {
+                        $('#wrap').append("<p class='triangle-obtuse left'>" + data[i].message + "</p>");
+                    } else {
+                        $('#wrap').append("<p class='triangle-obtuse right' >" + data[i].message + "</p>");
                     }
-                    if (i == data.length-1){
+                    if (i == data.length - 1) {
                         gvarData = data;
                         console.log(gvarData);
                     }
@@ -156,28 +180,40 @@
                 gvarData = data;
                 //alert("data has been gotten!");
                 var wrapper = $('#wrap');
-                wrapper.scrollTop = wrapper.scrollHeight; 
-           });
-           /*for (var i=0; i < d.length; i++){
-               $(document.body).append(d[i].message);
-           }*/
+                wrapper.scrollTop = wrapper.scrollHeight;
+            });
+            /*for (var i=0; i < d.length; i++){
+                $(document.body).append(d[i].message);
+            }*/
 
-           $('#msgtitle').click(function(){
-               console.log(gvarData);
-           });
+            $('#msgtitle').click(function () {
+                console.log(gvarData);
+            });
 
-           //$(document.body).append("Hello!!!");
+            //$(document.body).append("Hello!!!");
             //$(document.body).append(window.d[0].message);
-            
-           setInterval(function(){
-               //console.log(gvarData);
-           }, 300);
 
-           console.log(gvarData);
+            setInterval(function () {
+                //console.log(gvarData);
+            }, 300);
+
+            console.log(gvarData);
+            
+            var txt = document.getElementById('txt1');
+            txt.onkeydown = keydown;
+                
+            function keydown(event){
+                if (event.keyCode == 13){
+                    txt.value += '\n';
+                    // txt.value.replace('\n', '<br>');
+                    document.getElementById('arsh').innerHTML = txt.value.replace(/\n/g, '<br>');
+                    
+                }
+            }
 
         });
+    </script>
 
-        </script>
+</body>
 
-    </body>
 </html>

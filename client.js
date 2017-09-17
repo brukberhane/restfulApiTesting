@@ -53,6 +53,10 @@ app.get('/jquery', function (req, res){
 	res.sendFile(path.join(__dirname+'/client/jquery.js'));
 });
 
+app.get('/sendPic', function (req, res){
+	res.sendFile(path.join(__dirname+'/client/assets/send.png'));
+});
+
 app.get('/messages', function (req, res){
 
 	connection.query('SELECT * FROM messages', function (err, results, fields){
