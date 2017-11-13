@@ -71,9 +71,18 @@ server.route({
     method: 'POST',
     path: '/append',
     handler: function(request, reply){
-        
+        var post = {
+            message: request.payload.message,
+            uid_fk: request.payload.uid_fk
+        }
+
+        connection.query('INSERT INTO messages SET ?', post, function(err, result){
+            if (err) throw err;
+
+            reply(result);
+        });
     }
-})
+});
 
 server.route({
     method: 'POST',

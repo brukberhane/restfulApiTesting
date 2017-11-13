@@ -11,7 +11,8 @@
     </script>
     <style>
         body {
-            overflow-y: visible;
+            overflow-y: hidden;
+            background-color: green;
         }
 
         .triangle-obtuse {
@@ -65,7 +66,9 @@
 
         .content-wrapper {
             overflow-y: auto;
-            height: 80%;
+            height: 430px;
+            min-height: 230px;
+            
         }
         /* Scrollbar Styling */
 
@@ -92,7 +95,8 @@
             margin: 1.5em;
             padding: 0.8em;
 
-            color: #A2A2A2;
+            /* color: #A2A2A2; */
+            color: yellow;
             font-size: 1.1em;
             padding-left: 1.5em;
             outline: none;
@@ -130,9 +134,10 @@
 
 </head>
 
-<body bgcolor='gray'>
+<body>
 
-    <h1 align='center' id="msgtitle"> Messages: </h1>
+    <h1 align='center' id="msgtitle" class="triangle-obtuse top"> Messages: </h1>
+    
 
     <div style='background-color:blue'> </div>
 
@@ -140,15 +145,15 @@
     <div class="content-wrapper" id="wrap"></div>
     <!-- class="textstuffs" class="sendButton bottomstuff"-->
     <p class='bottomstuff'>
-        <textarea id="txt1" class="textstuffs" placeholder="Say something..." rows="1"></textarea>
-        <button class='sendButton'>
+        <textarea id="txt1" class="textstuffs" placeholder="Say something..." rows="1" autofocus></textarea>
+        <button class='sendButton' id="sendButton">
                 <svg viewBox='0 0 36 36' class='sendico' preserveAspectRatio="xMidYMid meet"style="pointer-events: none; display: block; width: 100%; height: 100%;background-color:transparent">
                         <rect  x="1" y="1" width="34" height="34" rx="17" ry="17" fill="yellow"></rect>
                     <g mirror-in-rtl="" viewBox='0 0 36 36'>
                             <path  fill-rule="evenodd" d="M0,18a18,18 0 1,0 36,0a18,18 0 1,0 -36,0M9.01 27L30 18 9.01 9 9 16l15 2-15 2z" class="style-scope iron-icon"></path>
                     </g>
                 </svg>
-            </button>
+        </button>
     </p>
     <p id="arsh"></p>
     <!--<textarea id="textarea" class="textstuffs" rows="1" autocomplete="on" autofocus="true" 
@@ -163,52 +168,110 @@
             $('.textstuffs').hide().slideDown('slow');
             $('.bottomstuff').hide().slideDown('slow');
 
-            $.get('http://localhost:8000/messages', {}, function (data) {
-                console.log(data)
-                for (var i = 0; i < data.length; i++) {
-                    if (data[i].uid_fk == 1) {
-                        $('#wrap').append("<p class='triangle-obtuse left'>" + data[i].message + "</p>");
-                    } else {
-                        $('#wrap').append("<p class='triangle-obtuse right' >" + data[i].message + "</p>");
+            function getMessages() {
+                $.get('http://localhost:8000/messages', {}, function (data) {
+                    gvarData = data;
+                    // console.log(gvarData);
+                    $('#wrap').html('');
+                    for (var i = 0; i < gvarData.length; i++) {
+                        if (gvarData[i].uid_fk == 1) {
+                            $('#wrap').append("<p class='triangle-obtuse left'>" + gvarData[i].message + "</p>");
+                        } else {
+                            $('#wrap').append("<p class='triangle-obtuse right' >" + gvarData[i].message + "</p>");
+                        }
+                        // if (i == data.length - 1) {
+                        //     gvarData = data;
+                        //     console.log(gvarData);
+                        // }
+                        // setTimeout(function () {
+                        //         $('#wrap').animate({
+                        //             scrollBottom: $('#wrap').outerHeight
+                        //         }, 500);
+
+                        //     }, 200);
+                        
                     }
-                    if (i == data.length - 1) {
-                        gvarData = data;
-                        console.log(gvarData);
-                    }
+                    gvarData = data;
+                    //alert("data has been gotten!");
+                });
+            }
+            
+            function scrollBottom(v){
+                if (v == true) {
+                    var wrap = document.getElementById('wrap');
+                    wrap.scrollIntoView(false);
                 }
-                gvarData = data;
-                //alert("data has been gotten!");
-                var wrapper = $('#wrap');
-                wrapper.scrollTop = wrapper.scrollHeight;
-            });
+            }
+
+            function sendMessage() {
+                var uid = 1;
+                var message = document.getElementById('txt1').value.trim();
+
+
+                if (message != '') {
+                    $.post('http://localhost:8000/append', { message: message, uid_fk: uid }, function (data) {
+                        console.log(data);
+
+                    });
+                } else {
+                    // alert('input something dude');
+                }
+                clearText();
+                getMessages();
+                $('#txt1').focus();
+                scrollBottom(true);
+            }
+
+            function clearText() {
+                $('#txt1').val('');
+                $('#txt1').val(function (index, value) {
+                    return value.replace(/\s/g, '');
+                })
+            }
+
+            getMessages();
             /*for (var i=0; i < d.length; i++){
                 $(document.body).append(d[i].message);
             }*/
 
             $('#msgtitle').click(function () {
                 console.log(gvarData);
+                getMessages();
             });
 
             //$(document.body).append("Hello!!!");
             //$(document.body).append(window.d[0].message);
 
             setInterval(function () {
-                //console.log(gvarData);
+                //console.log(gvarData);getMessages();
+                getMessages();
+                scrollBottom(true);
             }, 300);
 
             console.log(gvarData);
 
             var txt = document.getElementById('txt1');
-            txt.onkeydown = keydown;
+            // var txt = $('#txt1');
+            txt.onkeyup = keydown;
 
             function keydown(event) {
                 if (event.keyCode == 13) {
-                    txt.value += '\n';
+                    // txt.val += '\n';
                     // txt.value.replace('\n', '<br>');
-                    document.getElementById('arsh').innerHTML = txt.value.replace(/\n/g, '<br>');
+                    // document.getElementById('arsh').innerHTML = txt.value.replace(/\n/g, '<br>');
+                    if (event.shiftKey) {
+
+                    } else {
+                        event.preventDefault();
+                        sendMessage();
+                    }
 
                 }
             }
+
+            $('#sendButton').click(function () {
+                sendMessage();
+            });
 
         });
     </script>
