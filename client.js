@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({
 app.use(bodyParser.json());
 
 const connection = mysql.createConnection({
-	host: '192.168.137.1',
+	host: '192.168.1.69',
 	user: 'bruk',
 	password: 'pass12',
 	database: 'test'

@@ -9,14 +9,14 @@ const app = express();
 const server = new Hapi.Server();
 
 const connection = MySQL.createConnection({
-    host: '192.168.137.1',
+    host: '192.168.1.69',
     user: 'bruk',
     password: 'pass12',
     database: 'test'
 });
 
 server.connection({
-    host: 'localhost',
+    host: '192.168.1.69',
     port: '8000'
 });
 
@@ -81,6 +81,12 @@ server.route({
 
             reply(result);
         });
+    },
+    config: {
+        cors: {
+            origin: ['*'],
+            additionalHeaders: ['cache-control', 'x-requested-with']
+        }
     }
 });
 
@@ -127,7 +133,7 @@ server.route({
     path: '/jsutpls',
     handler: function (request, reply){
         console.log("just please work.");
-        reply("<form action='/messages' method='POST'><input type='text' name='uid'><input type='submit'><form>");
+        reply("<form action='/messags' method='POST'><input type='text' name='uid'><input type='submit'><form>");
     }
 });
 // ############ THIS CODE IS NOT PART OF THE RESTFUL API BUT FOR THE TESTING OF IT ############
