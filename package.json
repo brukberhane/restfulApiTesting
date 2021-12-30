@@ -13,7 +13,7 @@
   "author": "Bruk Berhane",
   "license": "ISC",
   "dependencies": {
-    "hapi": "^16.5.2",
+    "@hapi/hapi": "^20.2.1",
     "joi": "^10.6.0",
     "mysql": "^2.14.1"
   }
